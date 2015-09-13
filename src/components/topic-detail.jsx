@@ -22,18 +22,16 @@ module.exports = React.createClass({
 		Actions.getImages(nextProps.params.id);
     },
 	render: function() {
-		return <div className="row topic">
+		return <div className="topic">
 			{this.renderImages()}
 		</div>
 	},
 	renderImages: function(){
 
 		return this.state.images.map(function(image,index) {
-			return <div className="col-xs-6 col-md-3" key={image.id}>
-				<div className="image-preview">
+			return <div className="image-preview">
 					<ImagePreview {...image} />
 				</div>
-			</div>
 		});
 	},
 	onChange: function(event,images) {
