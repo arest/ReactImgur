@@ -28,6 +28,7 @@
   "devDependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
-    "gulp-rename": "^1.2.2"
+    "gulp-rename": "^1.2.2",
+    "yargs": "^3.24.0"
   }
 }

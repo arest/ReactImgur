@@ -10,8 +10,9 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 
-var Del    = require('del');  
+var Del    = require('del');
 var Rename = require('gulp-rename');
+var argv = require('yargs').argv;
 
 /**
  * Build Settings
@@ -19,9 +20,14 @@ var Rename = require('gulp-rename');
 var settings = {
   /*
    * Environment to build our application for
-   * - We'll come back to this soon.
+   * 
+   * If we have passed an environment via a
+   * CLI option, then use that. If not attempt
+   * to use the NODE_ENV. If not set, use production.
    */
-  environment : 'production',
+  environment : (!!argv.env
+                  ? argv.env
+                  : process.env.NODE_ENV || 'production'),
   /*
    * Where is our config folder?
    */
@@ -115,7 +121,7 @@ gulp.task('config', function() {
              .pipe(gulp.dest(settings.buildFolder));
 });
 
-gulp.task('default', ['build', 'serve', 'sass', 'watch']);
+gulp.task('default', ['config','build', 'serve', 'sass', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
